@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         viewModel.trainCount.observe(this, Observer {
-            Toast.makeText(this, "There are ${it.data.trainCount} trains right now :]", Toast.LENGTH_LONG).show()
+            train_count.text = it.data.trainCount.toString()
         })
     }
 
