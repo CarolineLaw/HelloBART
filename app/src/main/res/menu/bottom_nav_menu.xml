@@ -5,12 +5,12 @@
     <item
         android:id="@+id/action_recents"
         android:enabled="true"
-        android:title="Train Count"
+        android:title="@string/train_count"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_favorites"
         android:enabled="true"
-        android:title="Stations"
+        android:title="@string/stations"
         app:showAsAction="ifRoom" />
 </menu>

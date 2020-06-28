@@ -9,5 +9,15 @@
         android:id="@+id/trainCountFragment"
         android:name="com.ecs.hellobart.TrainCountFragment"
         android:label="train_count_fragment"
-        tools:layout="@layout/train_count_fragment" />
+        tools:layout="@layout/train_count_fragment" >
+        <action
+            android:id="@+id/action_trainCountFragment_to_stationsPickerFragment"
+            app:destination="@id/stationsPickerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/stationsPickerFragment"
+        android:name="com.ecs.hellobart.StationsPickerFragment"
+        android:label="stations_picker_fragment"
+        tools:layout="@layout/stations_picker_fragment" />
 </navigation>

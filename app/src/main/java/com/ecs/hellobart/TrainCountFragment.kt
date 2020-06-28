@@ -1,6 +1,7 @@
 package com.ecs.hellobart
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,8 +31,12 @@ class TrainCountFragment : Fragment() {
     }
 
     private fun setupBindings() {
-        viewModel.trainCount.observe(viewLifecycleOwner, Observer {
-            binding.trainCount.text = it.data.trainCount.toString()
+//        viewModel.trainCount.observe(viewLifecycleOwner, Observer {
+//            binding.trainCount.text = it.data.trainCount.toString()
+//        })
+
+        viewModel.stations.observe(viewLifecycleOwner, Observer {
+            binding.trainCount.text = it.data.stations.joinToString(", ") { it.stationName }
         })
     }
 

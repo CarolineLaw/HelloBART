@@ -3,23 +3,18 @@ package com.ecs.hellobart
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.ecs.hellobart.api.BARTService
-import com.squareup.moshi.Moshi
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class TrainCountViewModel: ViewModel() {
+class StationsPickerViewModel : ViewModel() {
 
     private val lazyService: BARTService by lazy {
         getRetrofit().create(BARTService::class.java)
     }
 
-    val trainCount = liveData(Dispatchers.IO) {
-        emit(getBARTService().getTrainCount())
-    }
-
-    val stations = liveData(Dispatchers.IO) {
+    val stationName = liveData(Dispatchers.IO) {
         emit(getBARTService().getStations())
     }
 
@@ -36,14 +31,11 @@ class TrainCountViewModel: ViewModel() {
     }
 
     fun getRetrofit(): Retrofit {
-        val moshiFactory = MoshiConverterFactory.create(getMoshi())
         // put baseURL in gradle config pls
         return Retrofit.Builder().baseUrl("https://api.bart.gov/api/")
-            .addConverterFactory(moshiFactory)
+            .addConverterFactory(MoshiConverterFactory.create())
             .client(getHttpClient()).build()
     }
-
-    private fun getMoshi() = Moshi.Builder().build()
 
     fun getBARTService(): BARTService {
         return lazyService

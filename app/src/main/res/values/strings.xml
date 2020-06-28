@@ -2,4 +2,5 @@
     <string name="app_name">HelloBART</string>
     <string name="train_count_text">"Train count: "</string>
     <string name="stations">Stations</string>
+    <string name="train_count">Train Count</string>
 </resources>
