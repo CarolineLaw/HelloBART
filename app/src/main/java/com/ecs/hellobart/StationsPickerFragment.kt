@@ -6,26 +6,40 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ecs.hellobart.api.Station
+import com.ecs.hellobart.databinding.StationsPickerFragmentBinding
 
 class StationsPickerFragment : Fragment() {
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: StationsAdapater
 
-    companion object {
-        fun newInstance() = StationsPickerFragment()
-    }
+    private lateinit var stations: List<Station>
+    private lateinit var binding: StationsPickerFragmentBinding
 
-    private val viewModel: StationsPickerViewModel by viewModels()
+    val viewModel : StationsPickerViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.stations_picker_fragment, container, false)
+        binding = StationsPickerFragmentBinding.inflate(inflater, container, false)
+
+        recyclerView = binding.stationsRecylerView
+        viewAdapter = StationsAdapater()
+
+        recyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.adapter = viewAdapter
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
+    override fun onResume() {
+        super.onResume()
+        viewModel.stations.observe(viewLifecycleOwner, Observer {
+            viewAdapter.updateStations(it.data.stations)
+        })
     }
-
 }

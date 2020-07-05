@@ -2,6 +2,7 @@ package com.ecs.hellobart
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.map
 import com.ecs.hellobart.api.BARTService
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
@@ -14,7 +15,7 @@ class StationsPickerViewModel : ViewModel() {
         getRetrofit().create(BARTService::class.java)
     }
 
-    val stationName = liveData(Dispatchers.IO) {
+    val stations = liveData(Dispatchers.IO) {
         emit(getBARTService().getStations())
     }
 
